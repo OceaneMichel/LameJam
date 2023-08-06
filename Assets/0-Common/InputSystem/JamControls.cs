@@ -35,6 +35,24 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MouseButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""65c10a62-1532-4499-b507-1771d7214b8f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""711ced0e-10f4-42e4-88a7-13ebafca73f3"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -147,6 +165,28 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30f8ba99-b533-4ecc-984b-53a39cd6274d"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ede1fbe-46ba-4e25-a971-50eb1204ca12"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -156,6 +196,8 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
         // Basic
         m_Basic = asset.FindActionMap("Basic", throwIfNotFound: true);
         m_Basic_Movement = m_Basic.FindAction("Movement", throwIfNotFound: true);
+        m_Basic_MouseButton = m_Basic.FindAction("MouseButton", throwIfNotFound: true);
+        m_Basic_MousePosition = m_Basic.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -218,11 +260,15 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Basic;
     private List<IBasicActions> m_BasicActionsCallbackInterfaces = new List<IBasicActions>();
     private readonly InputAction m_Basic_Movement;
+    private readonly InputAction m_Basic_MouseButton;
+    private readonly InputAction m_Basic_MousePosition;
     public struct BasicActions
     {
         private @JamControls m_Wrapper;
         public BasicActions(@JamControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Basic_Movement;
+        public InputAction @MouseButton => m_Wrapper.m_Basic_MouseButton;
+        public InputAction @MousePosition => m_Wrapper.m_Basic_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_Basic; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -235,6 +281,12 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @MouseButton.started += instance.OnMouseButton;
+            @MouseButton.performed += instance.OnMouseButton;
+            @MouseButton.canceled += instance.OnMouseButton;
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
         }
 
         private void UnregisterCallbacks(IBasicActions instance)
@@ -242,6 +294,12 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @MouseButton.started -= instance.OnMouseButton;
+            @MouseButton.performed -= instance.OnMouseButton;
+            @MouseButton.canceled -= instance.OnMouseButton;
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
         }
 
         public void RemoveCallbacks(IBasicActions instance)
@@ -262,5 +320,7 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
     public interface IBasicActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnMouseButton(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }
