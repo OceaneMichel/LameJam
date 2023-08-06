@@ -14,36 +14,45 @@ public class MeshBool2d : MonoBehaviour
 
     private Mesh m_mesh;
 
-    protected readonly List<List<IntPoint>> m_polys = new List<List<IntPoint>>();
-
-    private void DefineGrid()
+    protected readonly List<List<IntPoint>> m_polys = new List<List<IntPoint>>()
     {
-    // Define grid properties
-        int rows = 5;
-        int columns = 5;
-        float cellWidth = 2f;
-        float cellHeight = 2f;
-
-    // Generate the grid points
-        for (int y = 0; y < rows; y++)
+        new List<IntPoint>()
         {
-            for (int x = 0; x < columns; x++)
-            {
-                float xPos = x * cellWidth;
-                float yPos = y * cellHeight;
-
-                List<IntPoint> cellPoints = new List<IntPoint>()
-                {
-                    Convert((int)xPos, (int)yPos),
-                    Convert((int)(xPos + cellWidth), (int)yPos),
-                    Convert((int)(xPos + cellWidth), (int)(yPos + cellHeight)),
-                    Convert((int)xPos, (int)(yPos + cellHeight))
-                };
-
-                m_polys.Add(cellPoints);
-            }
+            Convert(0, 0),
+            Convert(0, 10),
+            Convert(10, 10),
+            Convert(10, 0)
         }
-    }
+    };
+
+    // private void DefineGrid()
+    // {
+    // // Define grid properties
+    //     int rows = 5;
+    //     int columns = 5;
+    //     float cellWidth = 2f;
+    //     float cellHeight = 2f;
+    //
+    // // Generate the grid points
+    //     for (int y = 0; y < rows; y++)
+    //     {
+    //         for (int x = 0; x < columns; x++)
+    //         {
+    //             float xPos = x * cellWidth;
+    //             float yPos = y * cellHeight;
+    //
+    //             List<IntPoint> cellPoints = new List<IntPoint>()
+    //             {
+    //                 Convert((int)xPos, (int)yPos),
+    //                 Convert((int)(xPos + cellWidth), (int)yPos),
+    //                 Convert((int)(xPos + cellWidth), (int)(yPos + cellHeight)),
+    //                 Convert((int)xPos, (int)(yPos + cellHeight))
+    //             };
+    //
+    //             m_polys.Add(cellPoints);
+    //         }
+    //     }
+    // }
 
     private readonly PolyTree m_polyTree = new PolyTree();
 
@@ -51,7 +60,7 @@ public class MeshBool2d : MonoBehaviour
     {
         m_mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = m_mesh;
-        DefineGrid();
+        //DefineGrid();
         InitMesh();
     }
 
