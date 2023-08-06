@@ -975,7 +975,7 @@ GameObject:
   - component: {fileID: 1330822620}
   - component: {fileID: 1330822622}
   - component: {fileID: 1330822621}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CollisionParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -990,14 +990,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330822619}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000003365105, y: -1, z: 0.000000029802319, w: 0.0000002926368}
-  m_LocalPosition: {x: 0, y: 0, z: 10.08}
+  m_LocalRotation: {x: -0.00000006517661, y: -0.9722602, z: -0.23390211, w: 0.00000028530619}
+  m_LocalPosition: {x: 0, y: 0, z: 9.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1751577996}
   m_Father: {fileID: 2080179027}
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: -27.054, y: -180, z: 0}
 --- !u!199 &1330822621
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -1040,7 +1040,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 4
+  m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -1085,7 +1085,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -1153,7 +1153,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1258,9 +1258,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 0
-      minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.73333335, b: 0, a: 1}
+      minMaxState: 2
+      minColor: {r: 1, g: 0.64744824, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.8441375, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1324,8 +1324,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.1
-      minScalar: 0.05
+      scalar: 0.3
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1648,7 +1648,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4656,9 +4656,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -4668,7 +4668,7 @@ ParticleSystem:
     m_Dampen:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4721,7 +4721,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.8
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -6297,7 +6297,7 @@ GameObject:
   - component: {fileID: 1751577996}
   - component: {fileID: 1751577998}
   - component: {fileID: 1751577997}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BeamParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

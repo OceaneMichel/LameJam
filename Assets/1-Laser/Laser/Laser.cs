@@ -43,7 +43,7 @@ public class Laser : MonoBehaviour
             m_meshBoolPlane.RemoveCircle(hit.point, m_laserSize, 12);
             m_sparklesParticles.transform.position = hit.point;
             m_sparklesParticles.Play();
-            m_laserLR.SetPosition(1, Vector3.forward*(hit.point-transform.position).magnitude);
+            m_laserLR.SetPosition(1, Vector3.forward*((hit.point-transform.position).magnitude-0.5f));
         }
     }
     
