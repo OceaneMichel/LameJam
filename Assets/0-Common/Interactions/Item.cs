@@ -10,6 +10,13 @@ public class Item : MonoBehaviour
     [SerializeField] public UnityEvent m_onActionStarted;
     [SerializeField] public UnityEvent m_onActionRunning;
     [SerializeField] public UnityEvent m_onActionEnded;
+
+    [Header("Grab settings")]
+    [SerializeField] private Vector3 m_grabOffsetPos;
+    public Vector3 GrabOffsetPos => m_grabOffsetPos;
+    [SerializeField] private Vector3 m_grabOffsetRot;
+    public Vector3 GrabOffsetRot => m_grabOffsetRot;
+    
     [SerializeField] public UnityEvent m_onGrabbed;
     [SerializeField] public UnityEvent m_onDropped;
     
@@ -35,7 +42,7 @@ public class Item : MonoBehaviour
         Toggle
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         m_outline = GetComponent<Outline>();
         m_body = GetComponent<Rigidbody>();
@@ -48,7 +55,7 @@ public class Item : MonoBehaviour
         m_baseParent = transform.parent;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         if (m_controls == null)
         {
@@ -69,7 +76,7 @@ public class Item : MonoBehaviour
         m_usageAction.canceled += ActionButtonEnded;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (!m_isGrabbed || m_usage != Usage.Holding || !m_usageAction.IsPressed())
         {

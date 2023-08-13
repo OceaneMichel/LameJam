@@ -1,14 +1,16 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInteraction : MonoBehaviour
+public class PlayerInteraction : Singleton<PlayerInteraction>
 {
-    [SerializeField] private Transform m_handTransform;
+    [SerializeField] private Transform m_rightHandTransform;
+    public Transform RightHandTransform => m_rightHandTransform;
+    
+    [SerializeField] private Transform m_leftHandTransform;
+    public Transform LeftHandTransform => m_leftHandTransform;
+    
     [SerializeField] private Item m_currentItemInHand;
 
     [SerializeField] private List<Item> m_closestItems;
@@ -61,9 +63,9 @@ public class PlayerInteraction : MonoBehaviour
             m_currentItemInHand.Highlight(false);
             m_grabbing = true;
 
-            closestItem.transform.SetParent(m_handTransform);
-            closestItem.transform.localPosition = Vector3.zero;
-            closestItem.transform.localRotation = quaternion.identity;
+            closestItem.transform.SetParent(m_rightHandTransform);
+            closestItem.transform.localPosition = closestItem.GrabOffsetPos;
+            closestItem.transform.localEulerAngles = closestItem.GrabOffsetRot;
         }
     }
 
