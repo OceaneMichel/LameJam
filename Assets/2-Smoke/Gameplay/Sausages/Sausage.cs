@@ -1,17 +1,20 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Sausage : MonoBehaviour
 {
     [SerializeField] private float m_cookingDuration;
+    [SerializeField] private float m_burningDuration;
     [SerializeField] private SnapItem m_sausageSnapItem;
     [SerializeField] private Renderer m_sausageRend;
     
     [SerializeField] private Color m_rawColor;
     [SerializeField] private Color m_cookedColor;
     [SerializeField] private Color m_burnedColor;
+
+    [Header("VFX")]
+    [SerializeField] private GameObject m_mainVFX;
+    [SerializeField] private Transform[] m_vfx;
     
     private float m_cookingElapsedTime = 0f;
     private bool m_onBarbecue;
@@ -36,7 +39,7 @@ public class Sausage : MonoBehaviour
         {
             m_burnt = true;
             // Trigger fire!
-            m_sausageRend.material.color = m_burnedColor;
+            StartCoroutine(BurningRoutine());
         }
     }
 
@@ -54,5 +57,27 @@ public class Sausage : MonoBehaviour
     private void UpdateSausageColor()
     {
         m_sausageRend.material.color = Color.Lerp(m_rawColor, m_cookedColor, m_cookingElapsedTime / m_cookingDuration);
+    }
+
+    private IEnumerator BurningRoutine()
+    {
+        m_mainVFX.SetActive(true);
+        float elapsed = 0f;
+        while (elapsed < m_burningDuration)
+        {
+            foreach (var vfx in m_vfx)
+            {
+                vfx.localScale = Vector3.one * elapsed / m_burningDuration;
+            }
+            
+            m_sausageRend.material.color = Color.Lerp(m_cookedColor, m_burnedColor, elapsed / m_burningDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        foreach (var vfx in m_vfx)
+        {
+            vfx.localScale = Vector3.one;
+        }
+        
     }
 }
