@@ -7,6 +7,8 @@ public class Extinguisher : MonoBehaviour
     
     [SerializeField] private GameObject m_hose;
     [SerializeField] private GameObject m_extremity;
+    [SerializeField] private GameObject m_etremityCollider;
+    
     [SerializeField] private Vector3 m_leftHandExtremityPos;
     [SerializeField] private Vector3 m_LeftHandExtremityRot;
 
@@ -39,10 +41,12 @@ public class Extinguisher : MonoBehaviour
     public void Activate()
     {
         m_particleSystem.Play();
+        m_etremityCollider.SetActive(true);
     }
 
     public void Deactivate()
     {
         m_particleSystem.Stop();
+        m_etremityCollider.SetActive(false);
     }
 }
