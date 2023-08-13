@@ -53,6 +53,15 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""GrabAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""bdce48ea-b50b-4fd4-a5ad-0677b4e1a289"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,6 +196,17 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""31633d3d-ae11-45e8-b071-d40ea7a64137"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GrabAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -198,6 +218,7 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
         m_Basic_Movement = m_Basic.FindAction("Movement", throwIfNotFound: true);
         m_Basic_MouseButton = m_Basic.FindAction("MouseButton", throwIfNotFound: true);
         m_Basic_MousePosition = m_Basic.FindAction("MousePosition", throwIfNotFound: true);
+        m_Basic_GrabAction = m_Basic.FindAction("GrabAction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -262,6 +283,7 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Basic_Movement;
     private readonly InputAction m_Basic_MouseButton;
     private readonly InputAction m_Basic_MousePosition;
+    private readonly InputAction m_Basic_GrabAction;
     public struct BasicActions
     {
         private @JamControls m_Wrapper;
@@ -269,6 +291,7 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Basic_Movement;
         public InputAction @MouseButton => m_Wrapper.m_Basic_MouseButton;
         public InputAction @MousePosition => m_Wrapper.m_Basic_MousePosition;
+        public InputAction @GrabAction => m_Wrapper.m_Basic_GrabAction;
         public InputActionMap Get() { return m_Wrapper.m_Basic; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -287,6 +310,9 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
+            @GrabAction.started += instance.OnGrabAction;
+            @GrabAction.performed += instance.OnGrabAction;
+            @GrabAction.canceled += instance.OnGrabAction;
         }
 
         private void UnregisterCallbacks(IBasicActions instance)
@@ -300,6 +326,9 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
+            @GrabAction.started -= instance.OnGrabAction;
+            @GrabAction.performed -= instance.OnGrabAction;
+            @GrabAction.canceled -= instance.OnGrabAction;
         }
 
         public void RemoveCallbacks(IBasicActions instance)
@@ -322,5 +351,6 @@ public partial class @JamControls: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnMouseButton(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnGrabAction(InputAction.CallbackContext context);
     }
 }
