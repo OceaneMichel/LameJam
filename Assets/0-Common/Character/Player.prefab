@@ -530,6 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab4a22e35d80354c9c148b7a061789d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_handTransform: {fileID: 4051862928593830357}
   m_currentItemInHand: {fileID: 0}
   m_closestItems: []
 --- !u!135 &-3516822468485380499
@@ -553,3 +554,8 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!4 &4051862928593830357 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 869f0f84c500f0e4c8c18dfa0c6e63f4, type: 3}
+  m_PrefabInstance: {fileID: 2418071363114974749}
+  m_PrefabAsset: {fileID: 0}

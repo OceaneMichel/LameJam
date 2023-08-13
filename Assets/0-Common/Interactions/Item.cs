@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Outline))]
 public class Item : MonoBehaviour
 {
     [SerializeField] private Usage m_usage;
@@ -12,14 +13,14 @@ public class Item : MonoBehaviour
 
     private JamControls m_controls;
     private InputAction m_usageAction;
+
+    // Item components parameters
+    private Rigidbody m_body;
+    private bool m_useGravity;
+    private Collider m_collider;
+    private Outline m_outline;
     
     private bool m_isGrabbed;
-    public bool IsGrabbed
-    {
-        get { return m_isGrabbed; }
-        set { m_isGrabbed = value; }
-    }
-    
     private bool m_actionRunning;
 
     private enum Usage
@@ -27,6 +28,17 @@ public class Item : MonoBehaviour
         Once,
         Holding,
         Toggle
+    }
+
+    private void Awake()
+    {
+        m_outline = GetComponent<Outline>();
+        m_body = GetComponent<Rigidbody>();
+        m_collider = GetComponent<Collider>();
+        if (m_body)
+        {
+            m_useGravity = m_body.useGravity;
+        }
     }
 
     private void Start()
@@ -86,5 +98,21 @@ public class Item : MonoBehaviour
     {
         Debug.Log($"Do single action on {this.name}");
         m_onActionStarted?.Invoke();
+    }
+
+    public void Grab(bool grab)
+    {
+        if (m_body)
+        {
+            m_body.useGravity = !grab && m_useGravity;
+        }
+
+        m_collider.isTrigger = grab;
+        m_isGrabbed = grab;
+    }
+
+    public void Highlight(bool highlight)
+    {
+        m_outline.enabled = highlight;
     }
 }
