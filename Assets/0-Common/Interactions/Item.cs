@@ -12,6 +12,7 @@ public class Item : MonoBehaviour
     [SerializeField] public UnityEvent m_onActionEnded;
 
     [Header("Grab settings")]
+    [SerializeField] private bool m_gravityOnDrop = true;
     [SerializeField] private Vector3 m_grabOffsetPos;
     public Vector3 GrabOffsetPos => m_grabOffsetPos;
     [SerializeField] private Vector3 m_grabOffsetRot;
@@ -47,11 +48,6 @@ public class Item : MonoBehaviour
         m_outline = GetComponent<Outline>();
         m_body = GetComponent<Rigidbody>();
         m_collider = GetComponent<Collider>();
-        if (m_body)
-        {
-            m_useGravity = m_body.useGravity;
-        }
-
         m_baseParent = transform.parent;
     }
 
@@ -151,7 +147,8 @@ public class Item : MonoBehaviour
     {
         if (m_body)
         {
-            m_body.useGravity = !grab && m_useGravity;
+            m_body.useGravity = !grab && m_gravityOnDrop;
+            m_body.isKinematic = false;
         }
 
         m_collider.isTrigger = grab;

@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8747103503627984758, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.481
@@ -61,6 +65,10 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -6064351570800518238, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6064351570800518238, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6ecfa426a90ad7f4cbd22a60d56ba5d1, type: 2}
@@ -72,10 +80,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sausage
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361313935301392525, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1361313935301392525, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6ecfa426a90ad7f4cbd22a60d56ba5d1, type: 2}
+    - target: {fileID: 1621818692347064671, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732293996584532177, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4987690451812064417, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4987690451812064417, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -97,7 +125,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6702324022654608007}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7093912080445959731}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3730780490615150479}
   m_SourcePrefab: {fileID: 100100000, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
+--- !u!23 &7933423009293002572 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1361313935301392525, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
+  m_PrefabInstance: {fileID: 9006484565283069889}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8087370021198717584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: dbb2a6e76198c704b9d9d826f2c2eca8, type: 3}
@@ -125,6 +164,9 @@ MonoBehaviour:
   m_onActionEnded:
     m_PersistentCalls:
       m_Calls: []
+  m_gravityOnDrop: 1
+  m_grabOffsetPos: {x: -0.09, y: 0.0256, z: 0.0189}
+  m_grabOffsetRot: {x: 0, y: 0, z: 5.293}
   m_onGrabbed:
     m_PersistentCalls:
       m_Calls: []
@@ -162,6 +204,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_snapType: sausage
+  OnSnapped:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnsnapped:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &6702324022654608007
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -183,3 +231,48 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.34831142, y: 0.041785, z: 0.04073286}
   m_Center: {x: 0.0012879372, y: 0.020606756, z: 0.00000023841858}
+--- !u!114 &7093912080445959731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087370021198717584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867ebdb36bd1fb44a82c058a40cc35f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_cookingDuration: 20
+  m_sausageSnapItem: {fileID: 6356768070143146497}
+  m_sausageRend: {fileID: 7933423009293002572}
+  m_rawColor: {r: 0.9372549, g: 0.6313726, b: 0.35686275, a: 1}
+  m_cookedColor: {r: 0.78431374, g: 0.3137255, b: 0, a: 1}
+  m_burnedColor: {r: 0.23921569, g: 0.11372549, b: 0, a: 1}
+--- !u!54 &-3730780490615150479
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087370021198717584}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

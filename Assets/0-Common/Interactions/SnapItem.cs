@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Item))]
 public class SnapItem : MonoBehaviour
@@ -8,6 +9,11 @@ public class SnapItem : MonoBehaviour
     private SnapZone m_currentProximitySnapZone;
     private SnapZone m_currentSnapZone;
     private Transform m_currentSnapSpot;
+
+    public UnityEvent OnSnapped;
+    public UnityEvent OnUnsnapped;
+    private bool m_isSnapped;
+    private Rigidbody m_body;
     
     private void Start()
     {
@@ -24,6 +30,8 @@ public class SnapItem : MonoBehaviour
             m_currentSnapZone.FreeSpot(m_currentSnapSpot);
             m_currentSnapZone = null;
             m_currentSnapSpot = null;
+            OnUnsnapped?.Invoke();
+            m_isSnapped = false;
         }
     }
     
@@ -38,9 +46,12 @@ public class SnapItem : MonoBehaviour
         {
             m_currentSnapZone = m_currentProximitySnapZone;
             m_currentSnapSpot = spotTransform;
+            if (m_body) m_body.isKinematic = true;
             transform.SetParent(spotTransform);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
+            m_isSnapped = true;
+            OnSnapped?.Invoke();
         }
     }
     

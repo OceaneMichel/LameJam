@@ -9843,6 +9843,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_gravityOnDrop: 1
   m_grabOffsetPos: {x: 0.115, y: 0.581, z: 0.071}
   m_grabOffsetRot: {x: -25.107, y: -68.631, z: 170.574}
   m_onGrabbed:
