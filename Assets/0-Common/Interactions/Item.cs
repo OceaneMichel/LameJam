@@ -7,10 +7,12 @@ public class Item : MonoBehaviour
 {
     [SerializeField] private Usage m_usage;
 
-    [SerializeField] private UnityEvent m_onActionStarted;
-    [SerializeField] private UnityEvent m_onActionRunning;
-    [SerializeField] private UnityEvent m_onActionEnded;
-
+    [SerializeField] public UnityEvent m_onActionStarted;
+    [SerializeField] public UnityEvent m_onActionRunning;
+    [SerializeField] public UnityEvent m_onActionEnded;
+    [SerializeField] public UnityEvent m_onGrabbed;
+    [SerializeField] public UnityEvent m_onDropped;
+    
     private JamControls m_controls;
     private InputAction m_usageAction;
 
@@ -23,7 +25,9 @@ public class Item : MonoBehaviour
     private bool _actionToggled = false;
     private bool m_isGrabbed;
     private bool m_actionRunning;
-
+    private Transform m_baseParent;
+    public Transform BaseParent => m_baseParent;
+    
     private enum Usage
     {
         Once,
@@ -40,6 +44,8 @@ public class Item : MonoBehaviour
         {
             m_useGravity = m_body.useGravity;
         }
+
+        m_baseParent = transform.parent;
     }
 
     private void Start()
@@ -90,8 +96,6 @@ public class Item : MonoBehaviour
         {
             return;
         }
-
-        // Start action
         // Debug.Log($"Start action on {this.name}");
         m_onActionStarted?.Invoke();
         m_actionRunning = true;
@@ -103,8 +107,6 @@ public class Item : MonoBehaviour
         {
             return;
         }
-
-        // Stop action
         // Debug.Log($"Stop action on {this.name}");
         m_onActionEnded?.Invoke();
         m_actionRunning = false;
@@ -137,7 +139,7 @@ public class Item : MonoBehaviour
             m_onActionEnded?.Invoke();
         }
     }
-
+    
     public void Grab(bool grab)
     {
         if (m_body)
@@ -148,6 +150,16 @@ public class Item : MonoBehaviour
         m_collider.isTrigger = grab;
         m_isGrabbed = grab;
         _actionToggled = false;
+        
+        // Trigger events
+        if (grab)
+        {
+            m_onGrabbed?.Invoke();
+        }
+        else
+        {
+            m_onDropped?.Invoke();
+        }
     }
 
     public void Highlight(bool highlight)
