@@ -110,7 +110,6 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("trigger enter");
         if (other.TryGetComponent(out Item item) && !m_closestItems.Contains(item))
         {
             m_closestItems.Add(item);
@@ -119,7 +118,6 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("trigger exit");
         if (other.TryGetComponent(out Item item) && m_closestItems.Contains(item))
         {
             m_closestItems.Remove(item);
