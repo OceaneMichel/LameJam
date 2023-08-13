@@ -58,6 +58,7 @@ public class PlayerInteraction : MonoBehaviour
 
             m_currentItemInHand = closestItem;
             m_currentItemInHand.Grab(true);
+            m_currentItemInHand.Highlight(false);
             m_grabbing = true;
 
             closestItem.transform.SetParent(m_handTransform);
