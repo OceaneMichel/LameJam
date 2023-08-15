@@ -17,6 +17,7 @@ public class SnapItem : MonoBehaviour
     
     private void Start()
     {
+        m_body = GetComponent<Rigidbody>();
         m_item = GetComponent<Item>();
         m_item.m_onDropped.AddListener(OnDroppedHandler);
         m_item.m_onGrabbed.AddListener(OnGrabHandler);
@@ -46,10 +47,10 @@ public class SnapItem : MonoBehaviour
         {
             m_currentSnapZone = m_currentProximitySnapZone;
             m_currentSnapSpot = spotTransform;
-            if (m_body) m_body.isKinematic = true;
             transform.SetParent(spotTransform);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
+            if (m_body) m_body.isKinematic = true;
             m_isSnapped = true;
             OnSnapped?.Invoke();
         }

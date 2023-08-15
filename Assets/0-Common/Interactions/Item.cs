@@ -147,8 +147,13 @@ public class Item : MonoBehaviour
     {
         if (m_body)
         {
+            if (!grab)
+            {
+                m_body.isKinematic = false;
+                m_body.velocity = Vector3.zero;
+                m_body.angularVelocity = Vector3.zero;
+            }
             m_body.useGravity = !grab && m_gravityOnDrop;
-            m_body.isKinematic = false;
         }
 
         m_collider.isTrigger = grab;

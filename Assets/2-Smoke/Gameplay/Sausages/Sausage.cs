@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Sausage : MonoBehaviour
 {
@@ -19,11 +19,14 @@ public class Sausage : MonoBehaviour
     [SerializeField] private GameObject m_mainVFX;
     [SerializeField] private Transform[] m_vfx;
     [SerializeField] private GameObject m_smokeVFX;
+
+    public UnityEvent OnFireStarted;
     
     private float m_cookingElapsedTime = 0f;
     private float m_puttingOffElapsedTime = 0f;
     private bool m_onBarbecue;
     private bool m_burnt;
+    private bool m_burning;
     private bool m_puttingOffFire;
     private bool m_fireExtinguished;
     
@@ -61,12 +64,15 @@ public class Sausage : MonoBehaviour
             return;
         }
 
+        if (m_burning) return;
         // Cook the sausage
         m_cookingElapsedTime += Time.deltaTime;
         UpdateSausageColor();
         if (m_cookingElapsedTime >= m_cookingDuration)
         {
             // Trigger fire!
+            OnFireStarted?.Invoke();
+            m_burning = true;
             StartCoroutine(BurningRoutine());
         }
     }
@@ -89,6 +95,7 @@ public class Sausage : MonoBehaviour
 
     private IEnumerator BurningRoutine()
     {
+        m_burnt = true;
         m_mainVFX.SetActive(true);
         float elapsed = 0f;
         while (elapsed < m_burningDuration)
@@ -106,7 +113,6 @@ public class Sausage : MonoBehaviour
         {
             vfx.localScale = Vector3.one;
         }
-        m_burnt = true;
     }
 
     private void Extinguish()
@@ -139,6 +145,7 @@ public class Sausage : MonoBehaviour
         }
         if (other.name.Equals("ConeCollider"))
         {
+            if(gameObject.name.Equals("Sausage (5)")) Debug.Log("trigger exit");
             m_puttingOffFire = false;
         }
     }
