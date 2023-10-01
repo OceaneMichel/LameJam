@@ -1,15 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
 public class PortalTeleporter : MonoBehaviour
 {
     // Cam
-    [SerializeField] private Transform m_playerCamera;
     [SerializeField] private CinemachineVirtualCamera m_virtualCam;
-    [SerializeField] private Transform m_virtualCamTarget;
 
     [SerializeField] private CharacterController m_playerController;
     [SerializeField] private Transform m_player;
@@ -33,24 +28,17 @@ public class PortalTeleporter : MonoBehaviour
                 Vector3 positionOffset = Quaternion.Euler(0f, rotationDiff, 0f) * portalToPlayer;
                 
                 // Move player controller
+                Vector3 playerOldPosition = m_player.position;
                 m_playerController.enabled = false;
                 m_player.position = m_targetReceiver.position + positionOffset;
                 m_playerController.enabled = true;
 
                 // Move camera
-                // m_playerCamera.position = m_playerCamera.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.transform.position;
-                // m_playerCamera.rotation = m_playerCamera.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.transform.rotation;
-                // m_playerCamera.GetComponent<CinemachineBrain>().ManualUpdate();
-                // Debug.Log(m_virtualCam.transform.position);
-                // Debug.Break();
-                
-                playerIsOverlapping = false;
+                m_virtualCam.OnTargetObjectWarped(m_player, m_player.position - playerOldPosition);
+                m_virtualCam.PreviousStateIsValid = false;
             }
         }
-        
-
     }
-    
 
     private void OnTriggerEnter(Collider other)
     {

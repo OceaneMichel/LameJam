@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PortalCamera : MonoBehaviour
@@ -9,7 +6,7 @@ public class PortalCamera : MonoBehaviour
    [SerializeField] private Transform m_portal;
    [SerializeField] private Transform m_otherPortal;
 
-   private void Update()
+   private void LateUpdate()
    {
       Vector3 playerOffsetFromPortal = m_playerCamera.position - m_otherPortal.position;
       transform.position = m_portal.position + playerOffsetFromPortal;
