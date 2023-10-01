@@ -20,14 +20,14 @@ public class PortalTeleporter : MonoBehaviour
     public UnityEvent OnTeleported;
     
     private bool playerIsOverlapping = false;
-
+    
     private void Update()
     {
         if (playerIsOverlapping)
         {
             // Check where the player is coming from
             Vector3 portalToPlayer = m_player.position - transform.position;
-            float dotProduct = Vector3.Dot(transform.forward, portalToPlayer);
+            float dotProduct = Vector3.Dot(transform.forward, m_player.forward);
             if (dotProduct < 0f)
             {
                 // Teleport 
@@ -56,6 +56,7 @@ public class PortalTeleporter : MonoBehaviour
                 m_virtualCam.OnTargetObjectWarped(m_player, m_player.position - playerOldPosition);
                 m_virtualCam.PreviousStateIsValid = false;
                 OnTeleported?.Invoke();
+                playerIsOverlapping = false;
             }
         }
     }
