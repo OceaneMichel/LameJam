@@ -1,4 +1,5 @@
 using Cinemachine;
+using StarterAssets;
 using UnityEngine;
 
 public class PortalTeleporter : MonoBehaviour
@@ -7,9 +8,14 @@ public class PortalTeleporter : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera m_virtualCam;
 
     [SerializeField] private CharacterController m_playerController;
+    [SerializeField] private ThirdPersonController m_tpsController;
     [SerializeField] private Transform m_player;
     [SerializeField] private Transform m_targetReceiver;
 
+    [SerializeField] private Vector3 m_newSize;
+    [SerializeField] private float m_newSpeed;
+    [SerializeField] private float m_newCameraDistanceToPlayer;
+    
     private bool playerIsOverlapping = false;
 
     private void Update()
@@ -31,6 +37,16 @@ public class PortalTeleporter : MonoBehaviour
                 Vector3 playerOldPosition = m_player.position;
                 m_playerController.enabled = false;
                 m_player.position = m_targetReceiver.position + positionOffset;
+                
+                // Change player size
+                m_player.localScale = m_newSize;
+                m_tpsController.MoveSpeed = m_newSpeed;
+                m_tpsController.SprintSpeed = m_newSpeed;
+                var componentBase = m_virtualCam.GetCinemachineComponent(CinemachineCore.Stage.Body);
+                if (componentBase is Cinemachine3rdPersonFollow)
+                {
+                    (componentBase as Cinemachine3rdPersonFollow).CameraDistance = m_newCameraDistanceToPlayer;
+                }
                 m_playerController.enabled = true;
 
                 // Move camera
