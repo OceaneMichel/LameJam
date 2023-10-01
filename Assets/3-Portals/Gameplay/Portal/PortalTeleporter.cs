@@ -1,6 +1,7 @@
 using Cinemachine;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PortalTeleporter : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PortalTeleporter : MonoBehaviour
     [SerializeField] private Vector3 m_newSize;
     [SerializeField] private float m_newSpeed;
     [SerializeField] private float m_newCameraDistanceToPlayer;
+
+    public UnityEvent OnTeleported;
     
     private bool playerIsOverlapping = false;
 
@@ -24,7 +27,7 @@ public class PortalTeleporter : MonoBehaviour
         {
             // Check where the player is coming from
             Vector3 portalToPlayer = m_player.position - transform.position;
-            float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
+            float dotProduct = Vector3.Dot(transform.forward, portalToPlayer);
             if (dotProduct < 0f)
             {
                 // Teleport 
@@ -52,6 +55,7 @@ public class PortalTeleporter : MonoBehaviour
                 // Move camera
                 m_virtualCam.OnTargetObjectWarped(m_player, m_player.position - playerOldPosition);
                 m_virtualCam.PreviousStateIsValid = false;
+                OnTeleported?.Invoke();
             }
         }
     }
