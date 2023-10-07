@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/2-Smoke/SmokeScene.unity
-    guid: 8aaedf44e4c5471429a38b63dc8c8b97
+    path: Assets/3-Portals/PortalScene.unity
+    guid: 5e10c142d68495c4189b07dd47eff04d
   m_configObjects: {}
