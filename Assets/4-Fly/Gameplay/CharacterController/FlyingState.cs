@@ -13,6 +13,7 @@ public class FlyingState : StateMachineBehaviour
     private Wings wings;
     private float previousGravity;
     private float previousMoveSpeed;
+    private bool isInWindColumn = false;
     
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -43,12 +44,23 @@ public class FlyingState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // Add upward force
-        if (!tpsController)
+        if (!wings)
         {
             return;
         }
 
+        // Left wind column this frame
+        if (isInWindColumn && wings.CurrentWindColumn == null)
+        {
+            tpsController.Gravity = -wings.AccumulatedGravity*2;
+            // reset velocity
+            tpsController.Grounded = true;
+        }
+        else
+        {
+            tpsController.Gravity = isInWindColumn ? wings.CurrentWindColumn.GravityInside : m_flyingGravity;
+        }
+        isInWindColumn = wings.CurrentWindColumn != null;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
