@@ -8,9 +8,9 @@ public class FlyingState : StateMachineBehaviour
     [SerializeField] private float m_flyingGravity;
     [SerializeField] private float m_movingSpeed;
     
-    private GameObject wings;
     private Rigidbody rigidbody;
     private ThirdPersonController tpsController;
+    private Wings wings;
     private float previousGravity;
     private float previousMoveSpeed;
     
@@ -33,11 +33,9 @@ public class FlyingState : StateMachineBehaviour
         {
             if (Vector3.Distance(hit.point, animator.transform.position) > m_minFlyingHeight)
             {
-                var wings = animator.GetComponentInChildren<Wings>(true);
-                this.wings = wings.gameObject;
-                
+                wings = animator.GetComponentInChildren<Wings>(true);
                 // Open wings
-                this.wings.SetActive(true);
+                wings.OpenPad();
             }
         }
     }
@@ -57,7 +55,11 @@ public class FlyingState : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Close wings
-        wings.SetActive(false);
+        if (wings)
+        {
+            wings.ClosePad();
+        }
+
         if (animator.TryGetComponent<Rigidbody>(out Rigidbody rb))
         {
             rb.angularVelocity = Vector3.zero;
