@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4508315183371268591}
   - component: {fileID: 7293727670473851833}
   - component: {fileID: 2280643805503874087}
+  - component: {fileID: 2129687619206998212}
   m_Layer: 0
   m_Name: Ring
   m_TagString: Untagged
@@ -66,6 +67,21 @@ MonoBehaviour:
   m_ringCollider: {fileID: 8687534739462947313}
   m_ringAnim: {fileID: 7293727670473851833}
   m_text: {fileID: 7020525615112753044}
+  m_playSound: {fileID: 2129687619206998212}
+--- !u!114 &2129687619206998212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4185528591672980297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb149807c9daff741b2ea1859ad862c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_source: {fileID: 0}
+  m_sound: {fileID: 8300000, guid: fa978168480590049a158b54cca17f9c, type: 3}
 --- !u!1001 &6751174783849869873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,6 +142,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -60
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: eca27eb3be6a77e47acddd75f70c4e77, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0ee7535d8da1835438fdc814edc74421, type: 2}
     - target: {fileID: 919132149155446097, guid: eca27eb3be6a77e47acddd75f70c4e77, type: 3}
       propertyPath: m_Name
       value: RingModel

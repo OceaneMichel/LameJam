@@ -6,6 +6,7 @@ public class Ring : MonoBehaviour
     [SerializeField] private Collider m_ringCollider;
     [SerializeField] private Animation m_ringAnim;
     [SerializeField] private TextMeshPro m_text;
+    [SerializeField] private PlaySound m_playSound;
     
     public void OnRingEntered()
     {
@@ -19,5 +20,6 @@ public class Ring : MonoBehaviour
         
         // Activate effect
         m_ringAnim.Play();
+        m_playSound.Play();
     }
 }
