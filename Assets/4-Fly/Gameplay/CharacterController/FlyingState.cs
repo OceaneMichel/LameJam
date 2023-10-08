@@ -52,9 +52,9 @@ public class FlyingState : StateMachineBehaviour
         // Left wind column this frame
         if (isInWindColumn && wings.CurrentWindColumn == null)
         {
-            tpsController.Gravity = -wings.AccumulatedGravity*2;
-            // reset velocity
-            tpsController.Grounded = true;
+            //Debug.Log("Accumutated gravity: " + wings.AccumulatedGravity);
+            tpsController.ResetVerticalVelocity();
+            tpsController.Gravity = 10;
         }
         else
         {

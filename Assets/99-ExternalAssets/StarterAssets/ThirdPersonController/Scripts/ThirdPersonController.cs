@@ -279,6 +279,11 @@ namespace StarterAssets
             }
         }
 
+        public void ResetVerticalVelocity()
+        {
+            _verticalVelocity = 0;
+        }
+        
         private void JumpAndGravity()
         {
             if (Grounded)

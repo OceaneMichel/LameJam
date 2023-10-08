@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/3-Portals/PortalScene.unity
-    guid: 5e10c142d68495c4189b07dd47eff04d
+    path: Assets/4-Fly/FlyScene.unity
+    guid: 782d1f05d1b95464bb3f9efa8af50ac5
   m_configObjects: {}

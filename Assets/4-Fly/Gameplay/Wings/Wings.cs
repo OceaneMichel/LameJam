@@ -8,8 +8,6 @@ public class Wings : MonoBehaviour
 
     private WindColumn currentWindColumn;
     public WindColumn CurrentWindColumn => currentWindColumn;
-    private float accumulatedGravity = 0f;
-    public float AccumulatedGravity => accumulatedGravity;
     
     private bool isOpen;
     public void OpenPad()
@@ -34,8 +32,7 @@ public class Wings : MonoBehaviour
         // Do not use layer or tag to not pollute future jams
         if (other.TryGetComponent(out WindColumn column))
         {
-            this.currentWindColumn = column;
-            accumulatedGravity = Time.time;
+            currentWindColumn = column;
         }
     }
 
@@ -43,8 +40,7 @@ public class Wings : MonoBehaviour
     {
         if (other.TryGetComponent(out WindColumn column))
         {
-            accumulatedGravity = ((Time.time - accumulatedGravity)*currentWindColumn.GravityInside)/Time.deltaTime;
-            this.currentWindColumn = null;
+            currentWindColumn = null;
         }
     }
 }
